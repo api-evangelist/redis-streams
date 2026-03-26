@@ -1,0 +1,28 @@
+aid: redis-streams
+name: Redis Streams
+description: >-
+  Redis Streams is a data structure in Redis for managing streams of data with consumer groups and message acknowledgment.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Microservices
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/redis-streams/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: redis-streams:redis-streams
+    name: Redis Streams
+    description: >-
+      Redis Streams is a data structure in Redis for managing streams of data with consumer groups and message acknowledgment.
+    humanURL: https://github.com/api-evangelist/redis-streams
+    tags:
+      - Microservices
+    properties: []
+common:
+  - type: Website
+    url: https://github.com/api-evangelist/redis-streams
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
