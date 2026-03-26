@@ -1,11 +1,19 @@
 aid: redis-streams
 name: Redis Streams
 description: >-
-  Redis Streams is a data structure in Redis for managing streams of data with consumer groups and message acknowledgment.
+  Redis Streams is a data structure in Redis that models an append-only log
+  for managing streams of data, providing consumer groups, message
+  acknowledgment, and the ability to process data in real time with
+  high throughput and low latency.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Microservices
+  - Streaming
+  - Redis
+  - Event-Driven
+  - Messaging
+  - In-Memory
+  - Consumer Groups
 url: >-
   https://raw.githubusercontent.com/api-evangelist/redis-streams/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -15,14 +23,32 @@ apis:
   - aid: redis-streams:redis-streams
     name: Redis Streams
     description: >-
-      Redis Streams is a data structure in Redis for managing streams of data with consumer groups and message acknowledgment.
-    humanURL: https://github.com/api-evangelist/redis-streams
+      Redis Streams is a Redis data structure that acts as an append-only
+      log, supporting consumer groups, range queries, and message
+      acknowledgment for building event-driven architectures and real-time
+      data processing pipelines.
+    humanURL: https://redis.io/docs/latest/develop/data-types/streams/
     tags:
-      - Microservices
+      - Streaming
+      - Redis
+      - Event-Driven
+      - Messaging
+      - In-Memory
+      - Consumer Groups
     properties: []
 common:
   - type: Website
-    url: https://github.com/api-evangelist/redis-streams
+    url: https://redis.io/
+  - type: Documentation
+    url: https://redis.io/docs/latest/develop/data-types/streams/
+  - type: Getting Started
+    url: https://redis.io/docs/latest/get-started/
+  - type: GitHub
+    url: https://github.com/redis/redis
+  - type: Blog
+    url: https://redis.io/blog/
+  - type: Community
+    url: https://redis.io/community/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
