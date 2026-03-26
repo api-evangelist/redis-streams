@@ -20,7 +20,7 @@ created: '2026-03-26'
 modified: '2026-03-26'
 specificationVersion: '0.19'
 apis:
-  - aid: redis-streams:redis-streams
+  - aid: redis-streams:redis-streams-api
     name: Redis Streams
     description: >-
       Redis Streams is a Redis data structure that acts as an append-only
@@ -35,7 +35,15 @@ apis:
       - Messaging
       - In-Memory
       - Consumer Groups
-    properties: []
+    properties:
+      - type: Documentation
+        url: https://redis.io/docs/latest/develop/data-types/streams/
+      - type: JSONSchema
+        url: json-schema/redis-stream-entry.json
+      - type: JSONSchema
+        url: json-schema/redis-consumer-group.json
+      - type: JSONSchema
+        url: json-schema/redis-stream-info.json
 common:
   - type: Website
     url: https://redis.io/

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/redis-streams/redis-consumer-group.json",
+  "title": "Redis Streams Consumer Group",
+  "description": "Schema for a Redis Streams consumer group configuration and state.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The consumer group name"
+    },
+    "stream": {
+      "type": "string",
+      "description": "The stream key this consumer group is attached to"
+    },
+    "last-delivered-id": {
+      "type": "string",
+      "description": "The ID of the last entry delivered to the group"
+    },
+    "entries-read": {
+      "type": "integer",
+      "description": "Total number of entries read by the group (Redis 7.0+)"
+    },
+    "lag": {
+      "type": "integer",
+      "description": "Number of entries in the stream that are still waiting to be delivered (Redis 7.0+)"
+    },
+    "pel-count": {
+      "type": "integer",
+      "description": "Number of entries in the Pending Entries List (PEL)"
+    },
+    "consumers": {
+      "type": "array",
+      "description": "List of consumers in this group",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Consumer name"
+          },
+          "pending": {
+            "type": "integer",
+            "description": "Number of pending entries for this consumer"
+          },
+          "idle": {
+            "type": "integer",
+            "description": "Idle time in milliseconds since last interaction"
+          },
+          "inactive": {
+            "type": "integer",
+            "description": "Inactive time in milliseconds (Redis 7.2+)"
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "stream"]
+}

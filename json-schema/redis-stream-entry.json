@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/redis-streams/redis-stream-entry.json",
+  "title": "Redis Stream Entry",
+  "description": "Schema for a Redis Streams entry, consisting of an auto-generated ID and field-value pairs.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$",
+      "description": "Stream entry ID in format <millisecondsTime>-<sequenceNumber>, e.g., 1526919030474-55. Can be auto-generated with *."
+    },
+    "fields": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs forming the stream entry data. Redis stores all values as strings."
+    }
+  },
+  "required": ["fields"]
+}

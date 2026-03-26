@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/redis-streams/redis-stream-info.json",
+  "title": "Redis Stream Info",
+  "description": "Schema for Redis XINFO STREAM response, providing detailed stream metadata.",
+  "type": "object",
+  "properties": {
+    "length": {
+      "type": "integer",
+      "description": "Number of entries in the stream"
+    },
+    "radix-tree-keys": {
+      "type": "integer",
+      "description": "Number of keys in the underlying radix tree"
+    },
+    "radix-tree-nodes": {
+      "type": "integer",
+      "description": "Number of nodes in the underlying radix tree"
+    },
+    "last-generated-id": {
+      "type": "string",
+      "description": "The last generated ID (may not be the last entry ID if entries were deleted)"
+    },
+    "max-deleted-entry-id": {
+      "type": "string",
+      "description": "The maximum entry ID that was deleted from the stream"
+    },
+    "entries-added": {
+      "type": "integer",
+      "description": "Total number of entries added to the stream over its lifetime"
+    },
+    "recorded-first-entry-id": {
+      "type": "string",
+      "description": "The ID of the first entry in the stream"
+    },
+    "groups": {
+      "type": "integer",
+      "description": "Number of consumer groups associated with the stream"
+    },
+    "first-entry": {
+      "type": "object",
+      "description": "The first entry in the stream",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "last-entry": {
+      "type": "object",
+      "description": "The last entry in the stream",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
