@@ -8,12 +8,12 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Streaming
-  - Redis
-  - Event-Driven
-  - Messaging
-  - In-Memory
   - Consumer Groups
+  - Event-Driven
+  - In-Memory
+  - Messaging
+  - Redis
+  - Streaming
 url: >-
   https://raw.githubusercontent.com/api-evangelist/redis-streams/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -29,12 +29,12 @@ apis:
       data processing pipelines.
     humanURL: https://redis.io/docs/latest/develop/data-types/streams/
     tags:
-      - Streaming
-      - Redis
-      - Event-Driven
-      - Messaging
-      - In-Memory
       - Consumer Groups
+      - Event-Driven
+      - In-Memory
+      - Messaging
+      - Redis
+      - Streaming
     properties:
       - type: Documentation
         url: https://redis.io/docs/latest/develop/data-types/streams/
