@@ -1,0 +1,40 @@
+{
+  "description": "Consumer group workflow — create group, read with acknowledgment",
+  "steps": [
+    {
+      "step": 1,
+      "action": "Create consumer group",
+      "command": "XGROUP CREATE mystream mygroup $ MKSTREAM",
+      "explanation": "Create 'mygroup' on 'mystream'. $ means only new entries. MKSTREAM creates the stream if it doesn't exist.",
+      "response": "OK"
+    },
+    {
+      "step": 2,
+      "action": "Read pending entries as a consumer",
+      "command": "XREADGROUP GROUP mygroup consumer-1 COUNT 10 STREAMS mystream >",
+      "explanation": "> means undelivered entries. Each entry goes into the Pending Entries List (PEL) until acknowledged.",
+      "response": [
+        {
+          "stream": "mystream",
+          "entries": [
+            {
+              "id": "1526919030474-55",
+              "fields": {
+                "event": "order_placed",
+                "order_id": "ORD-001",
+                "amount": "99.99"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Acknowledge processed entries",
+      "command": "XACK mystream mygroup 1526919030474-55",
+      "explanation": "Mark entry as processed. Removes it from the PEL.",
+      "response": 1
+    }
+  ]
+}

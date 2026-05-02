@@ -1,0 +1,35 @@
+{
+  "title": "Redis Stream Info Structure",
+  "description": "JSON structure documentation for XINFO STREAM response providing stream metadata, entry count, radix tree internals, and boundary entry references.",
+  "type": "object",
+  "fields": [
+    { "name": "length", "type": "integer", "required": false, "description": "Number of entries currently in the stream." },
+    { "name": "radix-tree-keys", "type": "integer", "required": false, "description": "Number of keys in the underlying radix tree." },
+    { "name": "radix-tree-nodes", "type": "integer", "required": false, "description": "Number of nodes in the underlying radix tree." },
+    { "name": "last-generated-id", "type": "string", "required": false, "description": "Last ID generated, may differ from the last entry if entries were deleted." },
+    { "name": "max-deleted-entry-id", "type": "string", "required": false, "description": "Highest ID that was deleted from the stream." },
+    { "name": "entries-added", "type": "integer", "required": false, "description": "Total entries ever added over the stream's lifetime." },
+    { "name": "recorded-first-entry-id", "type": "string", "required": false, "description": "ID of the first current entry." },
+    { "name": "groups", "type": "integer", "required": false, "description": "Number of consumer groups attached to the stream." },
+    {
+      "name": "first-entry",
+      "type": "object",
+      "required": false,
+      "description": "The oldest entry currently in the stream.",
+      "fields": [
+        { "name": "id", "type": "string", "description": "Entry ID." },
+        { "name": "fields", "type": "object", "description": "Field-value pairs." }
+      ]
+    },
+    {
+      "name": "last-entry",
+      "type": "object",
+      "required": false,
+      "description": "The most recent entry currently in the stream.",
+      "fields": [
+        { "name": "id", "type": "string", "description": "Entry ID." },
+        { "name": "fields", "type": "object", "description": "Field-value pairs." }
+      ]
+    }
+  ]
+}

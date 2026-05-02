@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "redis": "https://redis.io/ns/streams/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "StreamEntry": {
+      "@id": "redis:StreamEntry",
+      "@context": {
+        "id": {
+          "@id": "redis:entryId",
+          "@type": "xsd:string"
+        },
+        "fields": {
+          "@id": "redis:fields",
+          "@container": "@index"
+        }
+      }
+    },
+
+    "ConsumerGroup": {
+      "@id": "redis:ConsumerGroup",
+      "@context": {
+        "name": "schema:name",
+        "stream": {
+          "@id": "redis:streamKey",
+          "@type": "xsd:string"
+        },
+        "last-delivered-id": {
+          "@id": "redis:lastDeliveredId",
+          "@type": "xsd:string"
+        },
+        "entries-read": {
+          "@id": "redis:entriesRead",
+          "@type": "xsd:integer"
+        },
+        "lag": {
+          "@id": "redis:lag",
+          "@type": "xsd:integer"
+        },
+        "pel-count": {
+          "@id": "redis:pelCount",
+          "@type": "xsd:integer"
+        },
+        "consumers": {
+          "@id": "redis:consumers",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Consumer": {
+      "@id": "redis:Consumer",
+      "@context": {
+        "name": "schema:name",
+        "pending": {
+          "@id": "redis:pendingCount",
+          "@type": "xsd:integer"
+        },
+        "idle": {
+          "@id": "redis:idleMs",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "StreamInfo": {
+      "@id": "redis:StreamInfo",
+      "@context": {
+        "length": {
+          "@id": "redis:streamLength",
+          "@type": "xsd:integer"
+        },
+        "last-generated-id": {
+          "@id": "redis:lastGeneratedId",
+          "@type": "xsd:string"
+        },
+        "entries-added": {
+          "@id": "redis:entriesAdded",
+          "@type": "xsd:integer"
+        },
+        "groups": {
+          "@id": "redis:groupCount",
+          "@type": "xsd:integer"
+        },
+        "first-entry": {
+          "@id": "redis:firstEntry"
+        },
+        "last-entry": {
+          "@id": "redis:lastEntry"
+        }
+      }
+    }
+  }
+}

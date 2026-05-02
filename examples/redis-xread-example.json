@@ -1,0 +1,32 @@
+{
+  "description": "XREAD command — read entries from one or more streams",
+  "command": "XREAD COUNT 2 STREAMS mystream 0",
+  "explanation": "Read up to 2 entries from 'mystream' starting from ID 0 (the beginning of the stream).",
+  "response": [
+    {
+      "stream": "mystream",
+      "entries": [
+        {
+          "id": "1526919030474-55",
+          "fields": {
+            "sensor_id": "sensor-001",
+            "temperature": "23.5",
+            "humidity": "60"
+          }
+        },
+        {
+          "id": "1526919030474-56",
+          "fields": {
+            "sensor_id": "sensor-002",
+            "temperature": "21.0",
+            "humidity": "55"
+          }
+        }
+      ]
+    }
+  ],
+  "blocking_example": {
+    "command": "XREAD COUNT 10 BLOCK 5000 STREAMS mystream $",
+    "explanation": "Block for up to 5000ms waiting for new entries. $ means only new entries from now."
+  }
+}

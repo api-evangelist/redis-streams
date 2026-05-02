@@ -1,0 +1,11 @@
+{
+  "description": "XADD command — append a new entry to a stream",
+  "command": "XADD mystream * sensor_id sensor-001 temperature 23.5 humidity 60",
+  "explanation": "Appends a new entry to the stream 'mystream' with an auto-generated ID (* means auto). The entry has three fields: sensor_id, temperature, and humidity.",
+  "response": "1526919030474-55",
+  "response_description": "The auto-generated entry ID in <milliseconds>-<sequence> format.",
+  "programmatic_example": {
+    "language": "python",
+    "code": "import redis\nr = redis.Redis(host='localhost', port=6379)\nentry_id = r.xadd('mystream', {'sensor_id': 'sensor-001', 'temperature': '23.5', 'humidity': '60'})\nprint(entry_id)  # b'1526919030474-55'"
+  }
+}

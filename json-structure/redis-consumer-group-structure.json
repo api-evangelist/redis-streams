@@ -1,0 +1,28 @@
+{
+  "title": "Redis Streams Consumer Group Structure",
+  "description": "JSON structure documentation for a Redis Streams consumer group, including pending entry list (PEL) state and consumer tracking.",
+  "type": "object",
+  "fields": [
+    { "name": "name", "type": "string", "required": true, "description": "Consumer group name. Unique per stream." },
+    { "name": "stream", "type": "string", "required": true, "description": "The Redis key of the stream this group is attached to." },
+    { "name": "last-delivered-id", "type": "string", "required": false, "description": "ID of the last entry delivered to any consumer in this group." },
+    { "name": "entries-read", "type": "integer", "required": false, "description": "Total entries read by the group (Redis 7.0+)." },
+    { "name": "lag", "type": "integer", "required": false, "description": "Number of entries yet to be delivered (Redis 7.0+)." },
+    { "name": "pel-count", "type": "integer", "required": false, "description": "Count of entries in the Pending Entries List — delivered but not yet acknowledged." },
+    {
+      "name": "consumers",
+      "type": "array",
+      "required": false,
+      "description": "Individual consumers registered in this group.",
+      "items": {
+        "type": "object",
+        "fields": [
+          { "name": "name", "type": "string", "description": "Consumer name within the group." },
+          { "name": "pending", "type": "integer", "description": "Number of PEL entries for this consumer." },
+          { "name": "idle", "type": "integer", "description": "Milliseconds since last interaction." },
+          { "name": "inactive", "type": "integer", "description": "Milliseconds inactive (Redis 7.2+)." }
+        ]
+      }
+    }
+  ]
+}

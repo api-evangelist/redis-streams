@@ -1,0 +1,175 @@
+vocabulary:
+  name: Redis Streams Vocabulary
+  description: >-
+    Domain vocabulary for Redis Streams covering the core data structure,
+    commands, consumer group patterns, delivery guarantees, and use cases
+    for event-driven, append-only log processing with Redis.
+  version: "1.0.0"
+  created: "2026-05-02"
+  tags:
+    - Redis
+    - Streaming
+    - Event-Driven
+    - Messaging
+    - Consumer Groups
+
+terms:
+  - term: XADD
+    label: XADD Command
+    definition: >-
+      Redis command that appends a new entry to a stream. The entry consists
+      of a unique ID and one or more field-value pairs. If * is used as the
+      ID, Redis auto-generates it from the current millisecond timestamp.
+    syntax: "XADD key [NOMKSTREAM] [MAXLEN|MINID [=|~] threshold] [LIMIT count] *|id field value [field value ...]"
+
+  - term: XREAD
+    label: XREAD Command
+    definition: >-
+      Reads entries from one or more streams, starting from a specified ID.
+      Can block waiting for new entries using the BLOCK option. Returns
+      entries in FIFO order.
+    syntax: "XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] id [id ...]"
+
+  - term: XREADGROUP
+    label: XREADGROUP Command
+    definition: >-
+      Reads from a stream in the context of a consumer group. Uses > as
+      the special ID to read only new, undelivered entries. Delivered entries
+      are added to the Pending Entries List until acknowledged with XACK.
+    syntax: "XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] [NOACK] STREAMS key [key ...] id [id ...]"
+
+  - term: XACK
+    label: XACK Command
+    definition: >-
+      Acknowledges one or more messages as processed by a consumer in a
+      consumer group. Removes the entries from the Pending Entries List (PEL),
+      indicating successful processing.
+    syntax: "XACK key group id [id ...]"
+
+  - term: XGROUP CREATE
+    label: XGROUP CREATE Command
+    definition: >-
+      Creates a new consumer group on a stream. The starting ID determines
+      which entries the group will see: 0 reads from the beginning, $ reads
+      only new entries appended after group creation.
+    syntax: "XGROUP CREATE key groupname id|$ [MKSTREAM] [ENTRIESREAD entries-read]"
+
+  - term: XINFO STREAM
+    label: XINFO STREAM Command
+    definition: >-
+      Returns detailed metadata about a stream including its length,
+      consumer group count, first and last entries, and radix tree
+      internals. Use FULL for complete group and consumer details.
+    syntax: "XINFO STREAM key [FULL [COUNT count]]"
+
+  - term: XRANGE
+    label: XRANGE Command
+    definition: >-
+      Returns a range of entries from a stream between two IDs. The special
+      - and + IDs represent the minimum and maximum possible IDs,
+      returning all entries in the stream.
+    syntax: "XRANGE key start end [COUNT count]"
+
+  - term: XLEN
+    label: XLEN Command
+    definition: >-
+      Returns the number of entries in a stream. O(1) operation.
+    syntax: "XLEN key"
+
+  - term: XDEL
+    label: XDEL Command
+    definition: >-
+      Removes one or more entries from a stream by ID. The stream length
+      decreases but the IDs are not reused. Deleted IDs are tracked in
+      max-deleted-entry-id.
+    syntax: "XDEL key id [id ...]"
+
+  - term: XTRIM
+    label: XTRIM Command
+    definition: >-
+      Trims a stream to a given number of entries (MAXLEN) or to a minimum
+      ID (MINID). Use ~ for approximate trimming which is more efficient.
+    syntax: "XTRIM key MAXLEN|MINID [=|~] threshold [LIMIT count]"
+
+  - term: Consumer Group
+    label: Redis Streams Consumer Group
+    definition: >-
+      A mechanism for distributing stream entries across multiple consumers
+      and tracking message processing state. Consumer groups provide
+      at-least-once delivery semantics through the Pending Entries List (PEL).
+      Multiple consumer groups can be attached to the same stream independently.
+
+  - term: Entry ID
+    label: Stream Entry ID
+    definition: >-
+      A unique identifier for a stream entry in the format
+      <millisecondsTime>-<sequenceNumber>. The milliseconds portion is the
+      Unix timestamp when the entry was added. The sequence number is
+      incremented when multiple entries are added within the same millisecond.
+    format: "<milliseconds>-<sequence>"
+    examples:
+      - "1526919030474-55"
+      - "1700000000000-0"
+
+  - term: PEL
+    label: Pending Entries List
+    definition: >-
+      A per-consumer-group data structure that tracks entries delivered to
+      consumers but not yet acknowledged with XACK. The PEL enables
+      re-delivery of unprocessed entries after consumer failure.
+      Inspectable with XPENDING.
+    abbreviation: PEL
+
+  - term: XPENDING
+    label: XPENDING Command
+    definition: >-
+      Returns information about the Pending Entries List for a consumer group.
+      Shows total PEL count, min/max pending IDs, and per-consumer pending counts.
+    syntax: "XPENDING key group [[IDLE min-idle-time] start end count [consumer]]"
+
+  - term: XCLAIM
+    label: XCLAIM Command
+    definition: >-
+      Re-assigns ownership of pending entries from one consumer to another
+      within a consumer group. Used for recovering unprocessed messages after
+      consumer failure.
+    syntax: "XCLAIM key group consumer min-idle-time id [id ...] [IDLE ms] [TIME unix-time-ms] [RETRYCOUNT count] [FORCE] [JUSTID]"
+
+  - term: XAUTOCLAIM
+    label: XAUTOCLAIM Command
+    definition: >-
+      Automatically claims pending entries that have been idle longer than
+      min-idle-time milliseconds. Replaces the XCLAIM + XPENDING pattern
+      for consumer recovery. Returns a cursor for iterating large PELs.
+    syntax: "XAUTOCLAIM key group consumer min-idle-time start [COUNT count] [JUSTID]"
+
+  - term: Append-Only Log
+    label: Append-Only Log Pattern
+    definition: >-
+      A data structure pattern where entries can only be added to the tail,
+      never modified or reordered. Redis Streams implement an append-only
+      log with the ability to trim old entries via MAXLEN or MINID to
+      bound memory usage.
+
+  - term: Consumer
+    label: Stream Consumer
+    definition: >-
+      An individual reader within a consumer group. Consumers are
+      automatically created when XREADGROUP is called with a new consumer
+      name. Each consumer maintains its own PEL within the group.
+
+  - term: Delivery Semantics
+    label: At-Least-Once Delivery
+    definition: >-
+      Redis Streams with consumer groups provide at-least-once delivery:
+      entries are delivered to consumers and held in the PEL until
+      acknowledged. If a consumer fails before ACKing, the entry can be
+      re-claimed by another consumer. Applications must be idempotent or
+      implement deduplication for exactly-once semantics.
+
+  - term: Lag
+    label: Consumer Group Lag
+    definition: >-
+      The number of entries in the stream that have not yet been delivered
+      to a consumer group. A lag of 0 means the group has caught up to the
+      head of the stream. Available in XINFO GROUPS response for Redis 7.0+.

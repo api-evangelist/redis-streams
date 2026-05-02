@@ -17,7 +17,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/redis-streams/refs/heads/main/apis.yml
 created: '2026-03-26'
-modified: '2026-03-26'
+modified: '2026-05-02'
 specificationVersion: '0.19'
 apis:
   - aid: redis-streams:redis-streams-api
@@ -44,6 +44,17 @@ apis:
         url: json-schema/redis-consumer-group.json
       - type: JSONSchema
         url: json-schema/redis-stream-info.json
+      - type: JSONStructure
+        url: json-structure/redis-stream-entry-structure.json
+      - type: JSONStructure
+        url: json-structure/redis-consumer-group-structure.json
+      - type: JSONStructure
+        url: json-structure/redis-stream-info-structure.json
+      - type: JSONLd
+        url: json-ld/redis-streams-context.jsonld
+      - type: Vocabulary
+        url: vocabulary/redis-streams-vocabulary.yml
+
 common:
   - type: Website
     url: https://redis.io/
@@ -57,6 +68,11 @@ common:
     url: https://redis.io/blog/
   - type: Community
     url: https://redis.io/community/
+  - type: Commands Reference
+    url: https://redis.io/docs/latest/commands/?group=stream
+  - type: Tutorial
+    url: https://redis.io/docs/latest/develop/data-types/streams-tutorial/
+
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
