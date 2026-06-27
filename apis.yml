@@ -75,7 +75,7 @@ common:
 
   - type: Integrations
     url: https://redis.io/partners/
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://redis.io/llms.txt
 integrations:
   - name: Redis Cloud
