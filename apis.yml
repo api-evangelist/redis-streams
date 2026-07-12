@@ -56,6 +56,12 @@ apis:
         url: vocabulary/redis-streams-vocabulary.yml
 
 common:
+  - type: TrustCenter
+    url: security/redis-streams-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/redis-streams-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/redis-streams-domain-security.yml
   - type: Website
     url: https://redis.io/
   - type: Documentation
