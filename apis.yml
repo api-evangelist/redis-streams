@@ -1,5 +1,6 @@
 aid: redis-streams
 name: Redis Streams
+kind: topic
 description: >-
   Redis Streams is a data structure in Redis that models an append-only log
   for managing streams of data, providing consumer groups, message
