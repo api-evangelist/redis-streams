@@ -83,6 +83,12 @@ apis:
         url: vocabulary/redis-streams-vocabulary.yml
 
 common:
+  - type: Plans
+    url: plans/redis-streams-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/redis-streams-rate-limits.yml
+  - type: FinOps
+    url: finops/redis-streams-finops.yml
   - type: TrustCenter
     url: security/redis-streams-trust-center.yml
   - type: VulnerabilityDisclosure
