@@ -7,14 +7,18 @@ front_door_ai:
   probed_at: '2026-09-17'
   host: redis.io
   final_host: redis.io
-  ownership: own
-  owner: redis-streams
-  shares_host_with: null
+  ownership: shared
+  owner: redis
+  shares_host_with:
+  - redis
   inherited_from: null
+  alias_of: null
   verdict: scored
-  score: 16
+  score: null
+  band: null
+  band_label: null
   host_score: 16
-  density: 15.97
+  density: null
   words: 1002
   tiers:
     agentic: 6
